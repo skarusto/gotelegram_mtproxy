@@ -1,6 +1,6 @@
-# 🚀 GoTelegram: Безопасный MTProxy с Fake TLS
-Автор оригинального скрипта: https://github.com/anten-ka
-Оригинальный репозиторий: https://github.com/anten-ka/gotelegram_mtproxy
+# 🚀 GoTelegram: MTProxy с Fake TLS
+**Автор оригинального скрипта:** https://github.com/anten-ka
+**Оригинальный репозиторий:** https://github.com/anten-ka/gotelegram_mtproxy
 
 ## Изменения
 **Удалено:** реклама, промо, реферальные ссылки
