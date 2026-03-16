@@ -1,4 +1,4 @@
-# 🚀 GoTelegram: MTProxy с Fake TLS
+# GoTelegram: MTProto с fake TLS
 
 **Автор оригинального скрипта:** https://github.com/anten-ka
 
@@ -11,7 +11,7 @@
 
 ---
 
-## 📥 Быстрая установка (One-Liner)
+## Быстрая установка
 
 Просто скопируйте эту команду и вставьте в терминал вашего сервера (работает на Ubuntu/Debian/CentOS):
 
