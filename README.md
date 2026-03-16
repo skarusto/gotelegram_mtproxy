@@ -1,15 +1,10 @@
 # 🚀 GoTelegram: Безопасный MTProxy с Fake TLS
+Автор оригинального скрипта: https://github.com/anten-ka
+Оригинальный репозиторий: https://github.com/anten-ka/gotelegram_mtproxy
 
-Ультимативное решение для стабилизации работы Telegram через "партизанский" прокси. Скрипт маскирует трафик под обычные сайты, работает через Docker с автозапуском и управляется одной короткой командой.
-
----
-
-## 💎 Особенности
-* **Маскировка (Fake TLS):** Провайдер видит, что вы просто читаете новости или Википедию. Трафик не определяется как прокси.
-* **Быстрый выбор:** Список из предустановленных популярных доменов или ввод своего.
-* **Автоматизация:** Полная настройка Docker и зависимостей "под ключ" за один запуск.
-* **Удобное управление:** Команда `gotelegram` (или `GoTelegram`) доступна в консоли сразу после установки.
-* **QR-коды:** Генерация рабочих QR-кодов прямо в терминале для мгновенного подключения с телефона.
+## Изменения
+**Удалено:** реклама, промо, реферальные ссылки
+**Добавлено:** возможность ввода кастомного домена для маскировки
 
 ---
 
@@ -18,4 +13,4 @@
 Просто скопируйте эту команду и вставьте в терминал вашего сервера (работает на Ubuntu/Debian/CentOS):
 
 ```bash
-wget -O setup_gotelegram.sh https://raw.githubusercontent.com/anten-ka/gotelegram_mtproxy/main/setup_gotelegram.sh && chmod +x setup_gotelegram.sh && sudo ./setup_gotelegram.sh
+wget -O setup_gotelegram.sh https://raw.githubusercontent.com/skarusto/gotelegram_mtproxy/main/setup_gotelegram.sh && chmod +x setup_gotelegram.sh && sudo ./setup_gotelegram.sh
