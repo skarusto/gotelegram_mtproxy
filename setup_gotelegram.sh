@@ -118,6 +118,7 @@ while true; do
     echo -e "\n${MAGENTA}=== Оригинальный скрипт: https://github.com/anten-ka/gotelegram_mtproxy ===${NC}"
     echo -e "\n${CYAN}=== Форк: skarusto ===${NC}"
     echo -e "\n${CYAN}=== Удалено: реклама, промо, реферальные ссылки ===${NC}"
+    echo -e "\n${CYAN}=== Добавлено: возможность ввода кастомного домена для маскировки ===${NC}"
     echo -e "1) ${GREEN}Установить / Обновить прокси${NC}"
     echo -e "2) Показать данные подключения${NC}"
     echo -e "3) ${RED}Удалить прокси${NC}"
