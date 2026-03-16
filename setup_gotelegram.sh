@@ -3,8 +3,6 @@
 # --- КОНФИГУРАЦИЯ ---
 ALIAS_NAME="gotelegram"
 BINARY_PATH="/usr/local/bin/gotelegram"
-TIP_LINK="https://pay.cloudtips.ru/p/7410814f"
-PROMO_LINK="https://vk.cc/ct29NQ"
 
 # --- ЦВЕТА ---
 RED='\033[0;31m'
@@ -38,25 +36,6 @@ get_ip() {
     echo "$ip" | grep -E -o '([0-9]{1,3}\.){3}[0-9]{1,3}' | head -n 1
 }
 
-# --- 1) ПРОМО ПРИ ЗАПУСКЕ ---
-show_promo() {
-    clear
-    echo -e "${MAGENTA}╔══════════════════════════════════════════════════════════════╗${NC}"
-    echo -e "${MAGENTA}║          ХОСТИНГ СО СКИДКОЙ ДО -60% ОТ ANTEN-KA              ║${NC}"
-    echo -e "${MAGENTA}╚══════════════════════════════════════════════════════════════╝${NC}"
-    echo -e "${CYAN}  >>> Ссылка: $PROMO_LINK ${NC}"
-    echo -e "\n${MAGENTA}❖ •••••••••••••••••• АКТУАЛЬНЫЕ ПРОМОКОДЫ •••••••••••••••••• ❖${NC}"
-    printf "  ${YELLOW}%-12s${NC} : ${WHITE}%s${NC}\n" "OFF60" "Скидка 60% на ПЕРВЫЙ МЕСЯЦ"
-    printf "  ${YELLOW}%-12s${NC} : ${WHITE}%s${NC}\n" "antenka20" "Буст 20% + 3% (оплата за 3 МЕС)"
-    printf "  ${YELLOW}%-12s${NC} : ${WHITE}%s${NC}\n" "antenka6" "Буст 15% + 5% (оплата за 6 МЕС)"
-    printf "  ${YELLOW}%-12s${NC} : ${WHITE}%s${NC}\n" "antenka12" "Буст 5% + 5% (оплата за 12 МЕС)"
-    echo -e "${MAGENTA}❖ •••••••••••••••••••••••••••••••••••••••••••••••••••••••••• ❖${NC}"
-    qrencode -t ANSIUTF8 "$PROMO_LINK"
-    echo -e "${GREEN}Сканируйте QR для перехода на хостинг${NC}"
-    echo -e "------------------------------------------------------"
-    read -p "Нажмите [ENTER], чтобы войти в меню управления..."
-}
-
 # --- ПАНЕЛЬ ДАННЫХ ---
 show_config() {
     if ! docker ps | grep -q "mtproto-proxy"; then echo -e "${RED}Прокси не найден!${NC}"; return; fi
@@ -79,10 +58,9 @@ menu_install() {
     echo -e "${CYAN}--- Выберите домен для маскировки (Fake TLS) ---${NC}"
     domains=(
         "google.com" "wikipedia.org" "habr.com" "github.com" 
-        "coursera.org" "udemy.com" "medium.com" "stackoverflow.com"
-        "bbc.com" "cnn.com" "reuters.com" "nytimes.com"
-        "lenta.ru" "rbc.ru" "ria.ru" "kommersant.ru"
-        "stepik.org" "duolingo.com" "khanacademy.org" "ted.com"
+        "web.max.ru" "rt.ru" "lenta.ru" "rbc.ru"
+        "ria.ru" "kommersant.ru" "stepik.org" "duolingo.com"
+        "Свой домен (ввести вручную)"
     )
     
     for i in "${!domains[@]}"; do
@@ -90,8 +68,14 @@ menu_install() {
         [[ $(( (i+1) % 2 )) -eq 0 ]] && echo ""
     done
     
-    read -p "Ваш выбор [1-20]: " d_idx
-    DOMAIN=${domains[$((d_idx-1))]}
+    read -p "Ваш выбор [1-13]: " d_idx
+    
+    if [[ "$d_idx" == "13" ]]; then
+        read -p "Введите ваш домен: " DOMAIN
+    else
+        DOMAIN=${domains[$((d_idx-1))]}
+    fi
+    
     DOMAIN=${DOMAIN:-google.com}
 
     echo -e "\n${CYAN}--- Выберите порт ---${NC}"
@@ -121,31 +105,28 @@ menu_install() {
 show_exit() {
     clear
     show_config
-    echo -e "\n${MAGENTA}💰 ПОДДЕРЖКА АВТОРА (CloudTips)${NC}"
-    qrencode -t ANSIUTF8 "$TIP_LINK"
-    echo -e "Донат: $TIP_LINK"
-    echo -e "YouTube: https://www.youtube.com/@antenkaru"
     exit 0
 }
 
 # --- СТАРТ СКРИПТА ---
 check_root
 install_deps
-show_promo # Промо теперь только один раз при старте
 
 while true; do
-    echo -e "\n${MAGENTA}=== GoTelegram Manager (by anten-ka) ===${NC}"
+    echo -e "\n${MAGENTA}=== GoTelegram Manager ===${NC}"
+    echo -e "\n${MAGENTA}=== Автор: anten-ka ===${NC}"
+    echo -e "\n${MAGENTA}=== Оригинальный скрипт: https://github.com/anten-ka/gotelegram_mtproxy ===${NC}"
+    echo -e "\n${CYAN}=== Форк: skarusto ===${NC}"
+    echo -e "\n${CYAN}=== Удалено: реклама, промо, реферальные ссылки ===${NC}"
     echo -e "1) ${GREEN}Установить / Обновить прокси${NC}"
     echo -e "2) Показать данные подключения${NC}"
-    echo -e "3) ${YELLOW}Показать PROMO снова${NC}"
-    echo -e "4) ${RED}Удалить прокси${NC}"
+    echo -e "3) ${RED}Удалить прокси${NC}"
     echo -e "0) Выход${NC}"
     read -p "Пункт: " m_idx
     case $m_idx in
         1) menu_install ;;
         2) clear; show_config; read -p "Нажмите Enter..." ;;
-        3) show_promo ;;
-        4) docker stop mtproto-proxy && docker rm mtproto-proxy && echo "Удалено" ;;
+        3) docker stop mtproto-proxy && docker rm mtproto-proxy && echo "Удалено" ;;
         0) show_exit ;;
         *) echo "Неверный ввод" ;;
     esac
