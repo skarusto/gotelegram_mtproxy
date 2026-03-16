@@ -17,3 +17,7 @@
 
 ```bash
 wget -O setup_gotelegram.sh https://raw.githubusercontent.com/skarusto/gotelegram_mtproxy/main/setup_gotelegram.sh && chmod +x setup_gotelegram.sh && sudo ./setup_gotelegram.sh
+```
+
+## Управление
+Команда **gotelegram** в консоли
