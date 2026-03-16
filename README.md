@@ -13,7 +13,7 @@
 
 ## Быстрая установка
 
-Просто скопируйте эту команду и вставьте в терминал вашего сервера (работает на Ubuntu/Debian/CentOS):
+Скопировать команду и запустить в терминале сервера (работает на Ubuntu/Debian/CentOS):
 
 ```bash
 wget -O setup_gotelegram.sh https://raw.githubusercontent.com/skarusto/gotelegram_mtproxy/main/setup_gotelegram.sh && chmod +x setup_gotelegram.sh && sudo ./setup_gotelegram.sh
