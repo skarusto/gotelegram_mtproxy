@@ -110,7 +110,6 @@ menu_install() {
     else
         echo -e "${GREEN}Выбран домен: ${DOMAIN}${NC}"
     fi
-}
 
     echo -e "\n${CYAN}--- Выберите порт ---${NC}"
     echo -e "1) 443 (Рекомендуется)"
