@@ -147,17 +147,22 @@ check_root
 install_deps
 
 while true; do
-    echo -e "\n${MAGENTA}=== GoTelegram Manager ===${NC}"
-    echo -e "\n${MAGENTA}=== Автор: anten-ka ===${NC}"
-    echo -e "\n${MAGENTA}=== Оригинальный скрипт: https://github.com/anten-ka/gotelegram_mtproxy ===${NC}"
-    echo -e "\n${CYAN}=== Форк: skarusto ===${NC}"
-    echo -e "\n${CYAN}=== Удалено: реклама, промо, реферальные ссылки ===${NC}"
-    echo -e "\n${CYAN}=== Добавлено: возможность ввода кастомного домена для маскировки ===${NC}"
+    echo
+    echo -e "${WHITE}GoTelegram Manager${NC}"
+    echo
+    echo -e "${MAGENTA}Автор: anten-ka${NC}"
+    echo -e "${MAGENTA}Оригинальный скрипт: https://github.com/anten-ka/gotelegram_mtproxy${NC}"
+    echo
+    echo -e "${CYAN}Форк: skarusto${NC}"
+    echo -e "${CYAN}Удалено: реклама, промо, реферальные ссылки${NC}"
+    echo -e "${CYAN}Добавлено: возможность ввода кастомного домена для маскировки${NC}"
+    echo
     echo -e "1) ${GREEN}Установить / Обновить прокси${NC}"
-    echo -e "2) Показать данные подключения${NC}"
+    echo -e "2) ${YELLOW}Показать данные подключения${NC}"
     echo -e "3) ${RED}Удалить прокси${NC}"
     echo -e "0) Выход${NC}"
-    read -p "Пункт: " m_idx
+    echo
+    read -p "Выберите действие: " m_idx
     case $m_idx in
         1) menu_install ;;
         2) clear; show_config; read -p "Нажмите Enter..." ;;
