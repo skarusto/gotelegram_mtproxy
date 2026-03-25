@@ -56,8 +56,9 @@ show_config() {
 menu_install() {
     clear
     echo -e "${CYAN}--- Выберите домен для маскировки (Fake TLS) ---${NC}"
+    
     domains=(
-        "google.com" "wikipedia.org" "habr.com" "github.com" 
+        "google.com" "wikipedia.org" "habr.com" "github.com"
         "web.max.ru" "rt.ru" "lenta.ru" "rbc.ru"
         "ria.ru" "kommersant.ru" "stepik.org" "duolingo.com"
         "Свой домен (ввести вручную)"
@@ -67,16 +68,49 @@ menu_install() {
         printf "${YELLOW}%2d)${NC} %-20s " "$((i+1))" "${domains[$i]}"
         [[ $(( (i+1) % 2 )) -eq 0 ]] && echo ""
     done
+    echo  
     
-    read -p "Ваш выбор [1-13]: " d_idx
+    local choice
+    while true; do
+        read -p "Ваш выбор [1-${#domains[@]}]: " choice
+        
+        if [[ ! "$choice" =~ ^[0-9]+$ ]]; then
+            echo -e "${RED}Ошибка: введите число от 1 до ${#domains[@]}${NC}"
+            continue
+        fi
+        
+        if (( choice < 1 || choice > ${#domains[@]} )); then
+            echo -e "${RED}Ошибка: выберите номер от 1 до ${#domains[@]}${NC}"
+            continue
+        fi
+        
+        break
+    done
     
-    if [[ "$d_idx" == "13" ]]; then
-        read -p "Введите ваш домен: " DOMAIN
+    local selected="${domains[$((choice-1))]}"
+    
+    if [[ "$selected" == "Свой домен (ввести вручную)" ]]; then
+        while true; do
+            read -p "Введите ваш домен: " custom_domain
+            custom_domain="$(echo -n "$custom_domain" | xargs)"
+            if [[ -z "$custom_domain" ]]; then
+                echo -e "${RED}Домен не может быть пустым. Попробуйте снова.${NC}"
+            else
+                DOMAIN="$custom_domain"
+                break
+            fi
+        done
     else
-        DOMAIN=${domains[$((d_idx-1))]}
+        DOMAIN="$selected"
     fi
     
-    DOMAIN=${DOMAIN:-google.com}
+    if [[ -z "$DOMAIN" ]]; then
+        DOMAIN="google.com"
+        echo -e "${RED}Не удалось определить домен, установлен запасной: $DOMAIN${NC}"
+    else
+        echo -e "${GREEN}Выбран домен: ${DOMAIN}${NC}"
+    fi
+}
 
     echo -e "\n${CYAN}--- Выберите порт ---${NC}"
     echo -e "1) 443 (Рекомендуется)"
