@@ -167,7 +167,7 @@ while true; do
     case $m_idx in
         1) clear; show_config; read -p "Нажмите Enter..." ;;
         2) menu_install ;;
-        3) docker pull nineseconfs/mtg:2 && docker restart mtproto-proxy && echo "Обновлено" ;; 
+        3) docker pull nineseconds/mtg:2 && docker restart mtproto-proxy && echo "Обновлено" ;; 
         4) docker stop mtproto-proxy && docker rm mtproto-proxy && echo "Удалено" ;;
         0) show_exit ;;
         *) echo "Неверный ввод" ;;
