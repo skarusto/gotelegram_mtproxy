@@ -155,17 +155,20 @@ while true; do
     echo -e "${CYAN}Форк: skarusto${NC}"
     echo -e "${CYAN}Удалено: реклама, промо, реферальные ссылки${NC}"
     echo -e "${CYAN}Добавлено: возможность ввода кастомного домена для маскировки${NC}"
+    echo -e "${CYAN}Добавлено: обновление прокси${NC}"
     echo
-    echo -e "1) ${GREEN}Установить / Обновить прокси${NC}"
-    echo -e "2) ${YELLOW}Показать данные подключения${NC}"
-    echo -e "3) ${RED}Удалить прокси${NC}"
+    echo -e "1) ${GREEN}Показать данные подключения${NC}"
+    echo -e "2) ${CYAN}Переустановить прокси${NC}"
+    echo -e "3) ${YELLOW}Обновить прокси${NC}"
+    echo -e "4) ${RED}Удалить прокси${NC}"
     echo -e "0) Выход${NC}"
     echo
     read -p "Выберите действие: " m_idx
     case $m_idx in
-        1) menu_install ;;
-        2) clear; show_config; read -p "Нажмите Enter..." ;;
-        3) docker stop mtproto-proxy && docker rm mtproto-proxy && echo "Удалено" ;;
+        1) clear; show_config; read -p "Нажмите Enter..." ;;
+        2) menu_install ;;
+        3) docker pull nineseconfs/mtg:2 && docker restart mtproto-proxy && echo "Обновлено" ;; 
+        4) docker stop mtproto-proxy && docker rm mtproto-proxy && echo "Удалено" ;;
         0) show_exit ;;
         *) echo "Неверный ввод" ;;
     esac
